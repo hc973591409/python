@@ -68,7 +68,7 @@ a,b = b,a
 print(a)
 print(b)
 # 如何在一个 function 里设置一个全局变量
-# g_num = 100
+g_num = 100
 def func():
     global g_num
     g_num += 10
