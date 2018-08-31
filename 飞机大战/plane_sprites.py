@@ -20,7 +20,7 @@ class PlaneSprite(pygame.sprite.Sprite):
         # 加载图像
         # 名字是固定的，不能改变
         self.image = pygame.image.load(img_name)
-        
+
         # 返回值为img的位置(0,0) 宽高（图像宽高）
         self.rect = self.image.get_rect()
         print(self.rect)
@@ -36,7 +36,7 @@ class BackGroud(PlaneSprite):
         # 调用父类方法
         super().__init__("./feiji/background.png")
         self.__flag = flag
-         # 设置初始位置
+        # 设置初始位置
         if not self.__flag:
             # print("我在底部 %d" %self.rect.bottom)
             self.rect.bottom = SCREEN_SIZE.bottom
@@ -51,16 +51,15 @@ class BackGroud(PlaneSprite):
             print("我已经被召唤回来")
             self.rect.bottom = 0
 
+
 class EnameyPlane(PlaneSprite):
     def __init__(self):
         # 随机速度
-        self.speed = random.randint(1,3)
-        super().__init__('feiji/enemy-1.gif',self.speed)
+        self.speed = random.randint(1, 3)
+        super().__init__('feiji/enemy-1.gif', self.speed)
         self.rect.bottom = 0
         # 随机位置
-        self.rect.left = random.randint(0,SCREEN_SIZE.width-self.rect.width)
-
-        
+        self.rect.left = random.randint(0, SCREEN_SIZE.width-self.rect.width)
 
     def update(self):
         super().update()
@@ -68,10 +67,11 @@ class EnameyPlane(PlaneSprite):
             print("被kill了")
             self.kill()
 
+
 class HeroPlane(PlaneSprite):
-    def __init__(self,speed=0):
+    def __init__(self, speed=0):
         self.speed = speed
-        super().__init__('./feiji/hero.gif',self.speed)
+        super().__init__('./feiji/hero.gif', self.speed)
         self.rect.bottom = SCREEN_SIZE.bottom - 120
         self.rect.centerx = SCREEN_SIZE.centerx
         # 创建子弹精灵组
@@ -87,16 +87,16 @@ class HeroPlane(PlaneSprite):
             self.rect.left = SCREEN_SIZE.left
 
     def fire(self):
-        for i in range(0,3):
-            bullet =Bullet()
+        for i in range(0, 3):
+            bullet = Bullet()
             bullet.rect.centerx = self.rect.centerx
-            bullet.rect.bottom = self.rect.top -(i*25)
+            bullet.rect.bottom = self.rect.top - (i*25)
             self.bullte_group.add(bullet)
 
 
 class Bullet(PlaneSprite):
     def __init__(self):
-        super().__init__("./feiji/bullet.png",-3)
+        super().__init__("./feiji/bullet.png", -3)
 
     def update(self):
         super().update()

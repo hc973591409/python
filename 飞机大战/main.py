@@ -12,14 +12,14 @@ class GamePlane(object):
         # 游戏屏幕
         self.__screen = pygame.display.set_mode(SCREEN_SIZE.size)
         # 设置窗口标题
-        pygame.display.set_caption('胡超开发的飞机大站游戏') 
+        pygame.display.set_caption('胡超开发的飞机大站游戏')
 
         # 游戏循环时钟
         self.__clock = pygame.time.Clock()
 
         # 自定义事件，事件定时器
-        pygame.time.set_timer(ENEMY_APPARE,1000)
-        pygame.time.set_timer(BULLET_SHOOT,500)
+        pygame.time.set_timer(ENEMY_APPARE, 1000)
+        pygame.time.set_timer(BULLET_SHOOT, 500)
 
         self.enemy_group = pygame.sprite.Group()
 
@@ -30,13 +30,11 @@ class GamePlane(object):
         # 创建，屏幕背景精灵精灵组
         self.bg_sprite1 = BackGroud()
         self.bg_sprite2 = BackGroud(flag=True)
-        self.bg_group = pygame.sprite.Group(self.bg_sprite1,self.bg_sprite2)
+        self.bg_group = pygame.sprite.Group(self.bg_sprite1, self.bg_sprite2)
 
         # 创建，英雄以及英雄精灵组
         self.hero_sprite = HeroPlane()
         self.hero_group = pygame.sprite.Group(self.hero_sprite)
-
-       
 
     def __update_sprite(self):
         # 更新，屏幕背景精灵精灵组
@@ -53,7 +51,7 @@ class GamePlane(object):
 
         self.hero_sprite.bullte_group.update()
         self.hero_sprite.bullte_group.draw(self.__screen)
-        
+
         pygame.display.update()
 
     def start_game(self):
@@ -71,9 +69,11 @@ class GamePlane(object):
 
     def __check_dead(self):
         # 子弹摧毁敌机
-        pygame.sprite.groupcollide(self.hero_sprite.bullte_group,self.enemy_group,True,True)
+        pygame.sprite.groupcollide(
+            self.hero_sprite.bullte_group, self.enemy_group, True, True)
         # 敌机撞毁英雄.返回一个列表，里面是碰撞单位的精灵
-        enemies = pygame.sprite.spritecollide(self.hero_sprite,self.enemy_group,True)
+        enemies = pygame.sprite.spritecollide(
+            self.hero_sprite, self.enemy_group, True)
         if len(enemies) > 0:
             self.hero_sprite.kill()
             print("U lose")
@@ -89,9 +89,9 @@ class GamePlane(object):
                 exit()
 
             elif event.type == ENEMY_APPARE:
-                 # 一秒增加一个敌机
-                 enemy = EnameyPlane()
-                 self.enemy_group.add(enemy)
+                # 一秒增加一个敌机
+                enemy = EnameyPlane()
+                self.enemy_group.add(enemy)
 
             elif event.type == BULLET_SHOOT:
                 self.hero_sprite.fire()
@@ -105,10 +105,6 @@ class GamePlane(object):
         else:
             self.hero_sprite.speed = 0
 
-                
-                
-
-   
     @staticmethod
     def game_over():
         print("游戏结束")
@@ -116,10 +112,10 @@ class GamePlane(object):
         exit()
 
 
-
 def main():
-    player=GamePlane()
+    player = GamePlane()
     player.start_game()
+
 
 if __name__ == '__main__':
     main()
