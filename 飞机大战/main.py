@@ -12,7 +12,7 @@ class GamePlane(object):
         # 游戏屏幕
         self.__screen = pygame.display.set_mode(SCREEN_SIZE.size)
         # 设置窗口标题
-        pygame.display.set_caption('胡超开发的飞机大站游戏')
+        pygame.display.set_caption('胡超开发的飞机大战游戏')
 
         # 游戏循环时钟
         self.__clock = pygame.time.Clock()
